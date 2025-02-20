@@ -1,0 +1,63 @@
+<div class="container mt-4">
+    <h2>Add Product</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          placeholder="Enter product name"
+        />
+        @if (productForm.get('name')?.hasError('required') && productForm.get('name')?.touched) {
+          <div class="text-danger">Name is required.</div>
+        }
+        @if (productForm.get('name')?.hasError('maxlength')) {
+          <div class="text-danger">Name must be less than 100 characters.</div>
+        }
+      </div>
+  
+      <!-- Description Field -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          formControlName="description"
+          placeholder="Enter product description"
+          rows="4"
+        ></textarea>
+        @if (productForm.get('description')?.hasError('required') && productForm.get('description')?.touched) {
+          <div class="text-danger">Description is required.</div>
+        }
+        @if (productForm.get('description')?.hasError('maxlength')) {
+          <div class="text-danger">Description must be less than 500 characters.</div>
+        }
+      </div>
+  
+      <!-- Price Field -->
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+          placeholder="Enter product price"
+        />
+        @if (productForm.get('price')?.hasError('required') && productForm.get('price')?.touched) {
+          <div class="text-danger">Price is required.</div>
+        }
+        @if (productForm.get('price')?.hasError('min')) {
+          <div class="text-danger">Price must be greater than or equal to 1.</div>
+        }
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+        Add Product
+      </button>
+    </form>
+  </div>
